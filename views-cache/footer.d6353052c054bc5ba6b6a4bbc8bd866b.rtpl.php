@@ -1,4 +1,11 @@
-<?php if(!class_exists('Rain\Tpl')){exit;}?><div class="footer-top-area">
+<?php if(!class_exists('Rain\Tpl')){exit;}?><!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+</head>
+<div class="footer-top-area">
     <div class="zigzag-bottom"></div>
     <div class="container">
         <div class="row">

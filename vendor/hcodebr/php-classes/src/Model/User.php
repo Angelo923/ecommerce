@@ -79,18 +79,67 @@ Class User extends Model {
 
     }
 
-    public function get($iduser){
+    public function save() 
+    {
+
+         $sqlData = new Sql();
+
+         $results = $sqlData->select("CALL sp_users_save(:desperson, :deslogin, :despassword, :desemail, :nrphone, :inadmin)", array(
+            ":desperson"=>$this->getdesperson(),
+            ":deslogin"=>$this->getdeslogin(),
+            ":despassword"=>$this->getdespassword(),
+            ":desemail"=>$this->getdesemail(),
+            ":nrphone"=>$this->getnrphone(),
+            ":inadmin"=>$this->getinadmin()
+         ));
+
+         $this->setData($results[0]);
+
+    }
+
+    public function get($iduser)
+    {
 
 
         $sqlData = new Sql();
 
-        $results = $sqlData->select("SELECT * FROM tb_users a INNER JOIN tb_persons b USING(idperson) WHERE a.iduser = :iduser;", array(
+        $results = $sqlData->select("SELECT * FROM tb_users a INNER JOIN tb_persons b USING(idperson) WHERE a.iduser = :iduser", array(
             ":iduser"=>$iduser
         ));
 
-        $data = $results[0];
+        $this->setData($results[0]);
+    }
 
-        $this->setData($data);
+    public function update()
+
+    {
+
+        $sqlData = new Sql();
+
+         $results = $sqlData->select("CALL sp_usersupdate_save(:iduser, :desperson, :deslogin, :despassword, :desemail, :nrphone, :inadmin)", array(
+            ":iduser"=>$this->getiduser(),
+            ":desperson"=>$this->getdesperson(),
+            ":deslogin"=>$this->getdeslogin(),
+            ":despassword"=>$this->getdespassword(),
+            ":desemail"=>$this->getdesemail(),
+            ":nrphone"=>$this->getnrphone(),
+            ":inadmin"=>$this->getinadmin()
+         ));
+
+         $this->setData($results[0]);
+
+    }
+
+    public function delete()
+    {
+
+        $sqlData = new Sql();
+
+        $sqlData->query("CAll sp_users_delete(:iduser)", array(
+            ":iduser"=>$this->getiduser()
+        ));
+
+
     }
 
 }

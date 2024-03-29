@@ -12,9 +12,9 @@ Class User extends Model {
     public static function login($login, $password) 
     {
 
-        $sql = new Sql();
+        $sqlData = new Sql();
 
-        $results = $sql->select("SELECT * FROM  tb_users WHERE deslogin = :LOGIN", array(
+        $results = $sqlData->select("SELECT * FROM  tb_users WHERE deslogin = :LOGIN", array(
             ":LOGIN"=>$login
         ));
 
@@ -67,6 +67,15 @@ Class User extends Model {
     {
 
         $_SESSION[User::SESSION] = NULL;
+
+    }
+
+    public static function listAll()
+    {
+
+        $sqlData = new Sql();
+
+        return $sqlData->select("SELECT * FROM tb_users a INNER JOIN tb_persons b USING(idperson) ORDER BY b.desperson");
 
     }
 

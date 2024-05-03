@@ -14,7 +14,9 @@ class Mailer
 {
 
     const USERNAME = "phpcarteirophp@gmail.com";
-    const PASSWORD = "tetv ozhk qhce iijo";
+
+    const PASSWORD = "amgt ehjz kpmw rngz";
+   
     const NAME_FROM = "HCODE Store";
 
     private $mail;
@@ -57,7 +59,7 @@ class Mailer
         //SMTP::DEBUG_OFF = off (for production use)
         //SMTP::DEBUG_CLIENT = client messages
         //SMTP::DEBUG_SERVER = client and server messages
-        $this->mail->SMTPDebug = SMTP::DEBUG_SERVER;
+        $this->mail->SMTPDebug = 2;
 
         //Set the hostname of the mail server
         $this->mail->Host = 'smtp.gmail.com';
@@ -73,7 +75,7 @@ class Mailer
         //Set the encryption mechanism to use:
         // - SMTPS (implicit TLS on port 465) or
         // - STARTTLS (explicit TLS on port 587)
-        $this->mail->SMTPSecure = PHPMailer::ENCRYPTION_SMTPS;
+        $this->mail->SMTPSecure = 'ssl';
 
         //Whether to use SMTP authentication
         $this->mail->SMTPAuth = true;
@@ -124,6 +126,7 @@ class Mailer
 
         public function send()
         {
+            
             return $this->mail->send();
         }
 

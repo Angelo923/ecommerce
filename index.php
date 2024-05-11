@@ -15,7 +15,6 @@ $app->config('debug', true);
 
 $app->get('/', function() {
     
-	User::verifyLogin();
 	
 	$page = new Page();
 
@@ -26,8 +25,9 @@ $app->get('/', function() {
 
 $app->get('/admin', function() { #nome da rota para acesso ao Admin
     
-	User::verifyLogin();
 	
+	User::verifyLogin();
+
 	$page = new PageAdmin();
 
 	$page->setTpl("index");
@@ -105,6 +105,7 @@ $app->get("/admin/users/:iduser/delete", function($iduser) {
 
 $app->get("/admin/users/:iduser", function($iduser) {
 
+
 	User::verifyLogin();
 
 	$user = new User();
@@ -121,7 +122,6 @@ $app->get("/admin/users/:iduser", function($iduser) {
 
 $app->post("/admin/users/create", function() {
 
-	User::verifyLogin();
 
 	$user = new User();
 
@@ -138,7 +138,6 @@ $app->post("/admin/users/create", function() {
 
 $app->post("/admin/users/:iduser", function($iduser) {
 
-	User::verifyLogin();
 
 	$user = new User();
 
@@ -237,7 +236,7 @@ $app->get("/admin/categories", function() {
 
 	
 	User::verifyLogin();
-	
+
 	$categories = Category::listAll();
 	
 	$page = new PageAdmin();
@@ -252,6 +251,7 @@ $app->get("/admin/categories", function() {
 
 $app->get("/admin/categories/create", function() {
 
+	
 	User::verifyLogin();
 
 	$page = new PageAdmin();
@@ -262,8 +262,9 @@ $app->get("/admin/categories/create", function() {
 
 $app->post("/admin/categories/create", function() {
 
-	User::verifyLogin();
 	
+	User::verifyLogin();
+
 	$category = new Category();
 
 	$category->setData($_POST);
@@ -312,7 +313,6 @@ $app->get("/admin/categories/:idcategory", function($idcategory)
 $app->post("/admin/categories/:idcategory", function($idcategory)
 {
 
-	User::verifyLogin();
 
 	$category = new Category();
 
@@ -326,6 +326,23 @@ $app->post("/admin/categories/:idcategory", function($idcategory)
 	exit;
 
 	
+});
+
+$app->get("/categories/:idcategory", function($idcategory){
+
+	$category = new Category();
+
+	$category->get((int)$idcategory);
+
+	$page = new Page();
+
+	$page->setTpl("category", [
+		'category'=>$category->getValues(),
+		'products'=>[]
+	]);
+
+
+
 });
 
 $app->run();

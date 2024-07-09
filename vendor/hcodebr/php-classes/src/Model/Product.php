@@ -128,7 +128,14 @@ class Product extends Model{
 				break;
 
 			case "png":
-					$image = imagecreatefrompng($file["tmp_name"]);
+                $image = imagecreatefrompng($file['tmp_name']);
+                $new_im = imagecreatetruecolor(imagesx($image), imagesy($image));
+                $white = imagecolorallocate($new_im, 255, 255, 255);
+                imagefill($new_im, 0, 0, $white);
+                imagealphablending($new_im, true);
+                imagecopy($new_im, $image, 0, 0, 0, 0, imagesx($image), imagesy($image));
+                imagedestroy($image);
+                $image = $new_im;
 				break;
 		}
 

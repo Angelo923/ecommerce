@@ -145,7 +145,7 @@ $app->get("/admin/categories/:idcategory/products/:idproduct/add", function($idc
 $app->get("/admin/categories/:idcategory/products/:idproduct/remove", function($idcategory, $idproduct){
 
 	User::verifyLogin();
-	
+
 	$category = new Category();
 
 	$category->get((int)$idcategory);

@@ -133,7 +133,7 @@ Class Category extends Model {
    {
         $sqlData = new Sql();
 
-        $sqlData->query("DELETE FROM tb_categoriesproducts WHERE idcategory = :idcategory AND idproduct = :idproduct)", [
+        $sqlData->query("DELETE FROM tb_categoriesproducts WHERE idcategory = :idcategory AND idproduct = :idproduct", [
             ':idcategory'=>$this->getidcategory(),
             ':idproduct'=>$product->getidproduct()
         ]);
